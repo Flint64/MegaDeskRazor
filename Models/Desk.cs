@@ -5,6 +5,8 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc.ViewFeatures.Buffers;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MegaDeskRazor.Models {
     public class Desk {

@@ -7,16 +7,18 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using System.ComponentModel.DataAnnotations;
+using MegaDeskRazor.Data;
 
 namespace MegaDeskRazor.Models {
     public class DeskQuote {
 
         public int DeskQuoteId { get; set; }
 
-        //D.W
+        //Display the Current Date
         [Display(Name = "Current Date")]
         public DateTime CurrentDate { get; set; }
-        //D.W
+
+        //Display the customer name
         [Display(Name = "Customer Name")]
         public string CustomerName { get; set; }
 
@@ -40,14 +42,14 @@ namespace MegaDeskRazor.Models {
 
 
 
-        public decimal getQuote() {
+        public decimal GetQuote(MegaDeskRazorContext context) {
 
             //Desk base price
             Price = 200;
 
             //If surface area is over 1000, charge for every inch over 1000
-            if (Desk.SurfaceArea > 1000) {
-                Price += (Desk.SurfaceArea - 1000);
+            if (this.Desk.SurfaceArea > 1000) {
+                Price += (this.Desk.SurfaceArea - 1000);
             }
 
             //$50 for each drawer

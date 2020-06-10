@@ -21,22 +21,48 @@ namespace MegaDeskRazor.Pages.DeskQuotes
 
         public IActionResult OnGet()
         {
-        ViewData["DeskId"] = new SelectList(_context.Set<Desk>(), "DeskId", "DeskId");
-        ViewData["RushOptionId"] = new SelectList(_context.Set<RushOption>(), "RushOptionId", "RushOptionId");
+        //ViewData["DeskId"] = new SelectList(_context.Set<Desk>(), "DeskId", "DeskId");
+        ViewData["RushOptionId"] = new SelectList(_context.Set<RushOption>(), "RushOptionId", "RushOptionName");
+            
+        //Added ViewData["NumDrawersId"] but may not be needed
+        //ViewData["NumDrawersId"] = new SelectList(_context.Set<NumDrawers>(), "NumDrawersId", "NumberOfDrawers");
+            
+        ViewData["SurfaceMaterialId"] = new SelectList(_context.Set<SurfaceMaterial>(), "SurfaceMaterialId", "SurfaceMaterialName");
+            
             return Page();
         }
 
         [BindProperty]
         public DeskQuote DeskQuote { get; set; }
 
+        [BindProperty]
+        public Desk Desk { get; set; }
+
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://aka.ms/RazorPagesCRUD.
+
+
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
             {
                 return Page();
             }
+
+            //Save Desk and then save DeskQuote
+
+            _context.Desk.Add(Desk);
+            await _context.SaveChangesAsync();
+
+            DeskQuote.DeskId = Desk.DeskId;
+            DeskQuote.Desk = Desk;
+
+            DeskQuote.CurrentDate = DateTime.Now;
+
+
+            //Add CalculatePrice method
+            DeskQuote.Price = DeskQuote.GetQuote(_context);
+
 
             _context.DeskQuote.Add(DeskQuote);
             await _context.SaveChangesAsync();

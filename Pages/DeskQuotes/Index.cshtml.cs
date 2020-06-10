@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using MegaDeskRazor.Data;
 using MegaDeskRazor.Models;
+using MegaDeskRazor.Pages;
 
 namespace MegaDeskRazor.Pages.DeskQuotes
 {
