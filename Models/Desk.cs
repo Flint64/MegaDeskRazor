@@ -10,9 +10,14 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MegaDeskRazor.Models {
     public class Desk {
-
         public int DeskId { get; set; }
+
+        [Range(12, 48)]
+        [DataType(DataType.Currency)]
         public decimal Depth { get; set; }
+
+        [Range(24, 96)]
+        [DataType(DataType.Currency)]
         public decimal Width { get; set; }
         public decimal SurfaceArea { get; set; }
 

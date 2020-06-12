@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using MegaDeskRazor.Data;
 using MegaDeskRazor.Models;
+using System.Security.Cryptography;
 
 namespace MegaDeskRazor.Pages.DeskQuotes
 {
@@ -25,7 +26,7 @@ namespace MegaDeskRazor.Pages.DeskQuotes
         ViewData["RushOptionId"] = new SelectList(_context.Set<RushOption>(), "RushOptionId", "RushOptionName");
             
         //Added ViewData["NumDrawersId"] but may not be needed
-        //ViewData["NumDrawersId"] = new SelectList(_context.Set<NumDrawers>(), "NumDrawersId", "NumberOfDrawers");
+        ViewData["NumDrawersId"] = new SelectList(_context.Set<NumDrawers>(), "NumDrawersId", "NumberOfDrawers");
             
         ViewData["SurfaceMaterialId"] = new SelectList(_context.Set<SurfaceMaterial>(), "SurfaceMaterialId", "SurfaceMaterialName");
             
@@ -49,21 +50,27 @@ namespace MegaDeskRazor.Pages.DeskQuotes
                 return Page();
             }
 
-            //Save Desk and then save DeskQuote
+           
 
+            //Save Desk and then save DeskQuote
+            //Adds desk
             _context.Desk.Add(Desk);
             await _context.SaveChangesAsync();
 
+            //Set desk Id
             DeskQuote.DeskId = Desk.DeskId;
+            
+            //Set desk
             DeskQuote.Desk = Desk;
 
+            //Set quote date
             DeskQuote.CurrentDate = DateTime.Now;
 
 
-            //Add CalculatePrice method
+            //Add CalculatePrice method; sets the quote price
             DeskQuote.Price = DeskQuote.GetQuote(_context);
 
-
+            //Adds and saves the desk quote
             _context.DeskQuote.Add(DeskQuote);
             await _context.SaveChangesAsync();
 

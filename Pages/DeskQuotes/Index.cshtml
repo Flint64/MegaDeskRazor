@@ -10,21 +10,26 @@
 <p>
     <a asp-page="Create">Create New</a>
 </p>
+<form>
+    <p>
+        Customer Name: <input type="text" asp-for="SearchString" />
+        <input type="submit" value="Filter" />
+    </p>
+</form>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.DeskQuote[0].CurrentDate)
+                <a asp-route-sortBy="DateCreated">Date Created</a>
             </th>
+
             <th>
-                @Html.DisplayNameFor(model => model.DeskQuote[0].CustomerName)
+                <a asp-route-sortBy="Name">Customer Name</a>
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.DeskQuote[0].Price)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DeskQuote[0].Desk)
-            </th>
+            
             <th>
                 @Html.DisplayNameFor(model => model.DeskQuote[0].RushOption)
             </th>
@@ -43,11 +48,9 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Price)
             </td>
+            
             <td>
-                @Html.DisplayFor(modelItem => item.Desk.DeskId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.RushOption.RushOptionId)
+                @Html.DisplayFor(modelItem => item.RushOption.RushOptionName)
             </td>
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.DeskQuoteId">Edit</a> |

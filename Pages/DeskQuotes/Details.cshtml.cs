@@ -20,6 +20,7 @@ namespace MegaDeskRazor.Pages.DeskQuotes
         }
 
         public DeskQuote DeskQuote { get; set; }
+        public Desk Desk { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {

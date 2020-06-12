@@ -13,6 +13,9 @@ namespace MegaDeskRazor.Pages.DeskQuotes
 {
     public class EditModel : PageModel
     {
+
+        private int? id;
+
         private readonly MegaDeskRazor.Data.MegaDeskRazorContext _context;
 
         public EditModel(MegaDeskRazor.Data.MegaDeskRazorContext context)
@@ -23,8 +26,13 @@ namespace MegaDeskRazor.Pages.DeskQuotes
         [BindProperty]
         public DeskQuote DeskQuote { get; set; }
 
+        [BindProperty]
+        public Desk Desk { get; set; }
+
         public async Task<IActionResult> OnGetAsync(int? id)
         {
+            this.id = id;
+
             if (id == null)
             {
                 return NotFound();
@@ -39,7 +47,11 @@ namespace MegaDeskRazor.Pages.DeskQuotes
                 return NotFound();
             }
            ViewData["DeskId"] = new SelectList(_context.Set<Desk>(), "DeskId", "DeskId");
-           ViewData["RushOptionId"] = new SelectList(_context.Set<RushOption>(), "RushOptionId", "RushOptionId");
+           ViewData["RushOptionId"] = new SelectList(_context.Set<RushOption>(), "RushOptionId", "RushOptionName");
+           ViewData["NumDrawersId"] = new SelectList(_context.Set<NumDrawers>(), "NumDrawersId", "NumberOfDrawers");
+           ViewData["SurfaceMaterialId"] = new SelectList(_context.Set<SurfaceMaterial>(), "SurfaceMaterialId", "SurfaceMaterialName");
+           //ViewData["DeskQuote"] = new SelectList(_context.Set<Desk>(), "Depth", "Depth");
+           // ViewData["DeskQuote"] = new SelectList(_context.Set<Desk>(), "Width", "Width");
             return Page();
         }
 
@@ -50,6 +62,11 @@ namespace MegaDeskRazor.Pages.DeskQuotes
             if (!ModelState.IsValid)
             {
                 return Page();
+                //return await this.OnGetAsync(this.id);
+
+                //return RedirectToPage("./Index");
+                
+
             }
 
             _context.Attach(DeskQuote).State = EntityState.Modified;
@@ -69,6 +86,7 @@ namespace MegaDeskRazor.Pages.DeskQuotes
                     throw;
                 }
             }
+
 
             return RedirectToPage("./Index");
         }
