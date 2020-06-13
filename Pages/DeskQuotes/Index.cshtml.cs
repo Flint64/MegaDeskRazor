@@ -60,13 +60,15 @@ namespace MegaDeskRazor.Pages.DeskQuotes
                 }
             }
 
-            //Books = new SelectList(await bookQuery.Distinct().ToListAsync());
-            DeskQuote = await deskquotes.ToListAsync();
-
             //This displays the RushOptionName on the index page.
             DeskQuote = await _context.DeskQuote
                 .Include(d => d.Desk)
                 .Include(d => d.RushOption).ToListAsync();
+
+            //Books = new SelectList(await bookQuery.Distinct().ToListAsync());
+            DeskQuote = await deskquotes.ToListAsync();
+
+            
         }
     }
 }

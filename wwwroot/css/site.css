@@ -2,9 +2,35 @@
 for details on configuring this project to bundle and minify static web assets. */
 
 a.navbar-brand {
-  white-space: normal;
-  text-align: center;
-  word-break: break-all;
+    white-space: normal;
+    text-align: center;
+    word-break: break-all;
+    color: white !important;
+}
+.navbar {
+    background-color: black !important;
+}
+.nav-link {
+    color: white !important;
+}
+
+.nav-item a:hover{
+    color: lightgray !important;
+}
+
+h1 {
+    font-family: 'Teko', sans-serif;
+}
+body {
+    background-color: #ffeec7;
+    font-family: 'IBM Plex Serif', serif;
+}
+.table thead th {
+    border-top: 2px solid black;
+    border-bottom: 2px solid black;
+}
+.table td {
+    border-top: 2px solid black;
 }
 
 /* Provide sufficient contrast against white background */

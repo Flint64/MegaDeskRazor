@@ -28,6 +28,8 @@ namespace MegaDeskRazor.Pages.DeskQuotes
 
         [BindProperty]
         public Desk Desk { get; set; }
+        [BindProperty]
+        public NumDrawers NumDrawers { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -49,7 +51,7 @@ namespace MegaDeskRazor.Pages.DeskQuotes
            ViewData["DeskId"] = new SelectList(_context.Set<Desk>(), "DeskId", "DeskId");
            ViewData["RushOptionId"] = new SelectList(_context.Set<RushOption>(), "RushOptionId", "RushOptionName");
            ViewData["NumDrawersId"] = new SelectList(_context.Set<NumDrawers>(), "NumDrawersId", "NumberOfDrawers");
-           ViewData["SurfaceMaterialId"] = new SelectList(_context.Set<SurfaceMaterial>(), "SurfaceMaterialId", "SurfaceMaterialName");
+            ViewData["SurfaceMaterialId"] = new SelectList(_context.Set<SurfaceMaterial>(), "SurfaceMaterialId", "SurfaceMaterialName");
            //ViewData["DeskQuote"] = new SelectList(_context.Set<Desk>(), "Depth", "Depth");
            // ViewData["DeskQuote"] = new SelectList(_context.Set<Desk>(), "Width", "Width");
             return Page();
@@ -64,11 +66,13 @@ namespace MegaDeskRazor.Pages.DeskQuotes
                 return Page();
                 //return await this.OnGetAsync(this.id);
 
-                //return RedirectToPage("./Index");
+                //return RedirectToPage("./DeskQuotes/Edit");
                 
 
             }
-
+            
+            
+            //DeskQuote.Price = DeskQuote.GetQuote(_context);
             _context.Attach(DeskQuote).State = EntityState.Modified;
 
             try

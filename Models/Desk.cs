@@ -13,11 +13,11 @@ namespace MegaDeskRazor.Models {
         public int DeskId { get; set; }
 
         [Range(12, 48)]
-        [DataType(DataType.Currency)]
+        [DataType(DataType.Text)]
         public decimal Depth { get; set; }
 
         [Range(24, 96)]
-        [DataType(DataType.Currency)]
+        [DataType(DataType.Text)]
         public decimal Width { get; set; }
         public decimal SurfaceArea { get; set; }
 
